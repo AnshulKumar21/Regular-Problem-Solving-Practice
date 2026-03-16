@@ -3,23 +3,21 @@ class Solution {
         int low = 0;
         int high = 0;
         int sum = 0;
-        double avg;
         while(high<k)
         {
             sum += nums[high];
             high++;
         }
-        avg = (double)sum/k;
-        double maxAvg = avg;
+                int maxSum = sum;
+
         while(high<nums.length)
         {
             sum = sum+nums[high]-nums[low];
-            avg = (double)sum/k;
-            maxAvg = Math.max(maxAvg,avg);
+            maxSum = Math.max(maxSum,sum);
             high++;
             low++;
         }
-        return maxAvg;
+        return (double)maxSum/k;
 
     }
 }
