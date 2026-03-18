@@ -1,54 +1,33 @@
 class Solution {
     public int longestSubstring(String s, int k) {
-        int maxLen = 0;
-        int n = s.length();
-        
-        // Try for all possible unique characters count
-        for (int targetUnique = 1; targetUnique <= 26; targetUnique++) {
-            
-            int[] freq = new int[26];
-            int left = 0, right = 0;
-            int unique = 0;       // total unique chars
-            int atLeastK = 0;     // chars with freq >= k
-            
-            while (right < n) {
+        return helper(s, 0, s.length(), k);
+    }
+
+    private int helper(String s, int start, int end, int k) {
+        if (end - start < k) return 0;
+
+        int[] freq = new int[26];
+        for (int i = start; i < end; i++) {
+            freq[s.charAt(i) - 'a']++;
+        }
+
+        // Find bad character
+        for (int mid = start; mid < end; mid++) {
+            if (freq[s.charAt(mid) - 'a'] < k) {
                 
-                // Expand window
-                if (freq[s.charAt(right) - 'a'] == 0) {
-                    unique++;
+                int midNext = mid + 1;
+                while (midNext < end && freq[s.charAt(midNext) - 'a'] < k) {
+                    midNext++;
                 }
-                
-                freq[s.charAt(right) - 'a']++;
-                
-                if (freq[s.charAt(right) - 'a'] == k) {
-                    atLeastK++;
-                }
-                
-                right++;
-                
-                // Shrink window if unique > target
-                while (unique > targetUnique) {
-                    
-                    if (freq[s.charAt(left) - 'a'] == k) {
-                        atLeastK--;
-                    }
-                    
-                    freq[s.charAt(left) - 'a']--;
-                    
-                    if (freq[s.charAt(left) - 'a'] == 0) {
-                        unique--;
-                    }
-                    
-                    left++;
-                }
-                
-                // Check valid window
-                if (unique == targetUnique && unique == atLeastK) {
-                    maxLen = Math.max(maxLen, right - left);
-                }
+
+                int left = helper(s, start, mid, k);
+                int right = helper(s, midNext, end, k);
+
+                return Math.max(left, right);
             }
         }
-        
-        return maxLen;
+
+        // Whole substring is valid
+        return end - start;
     }
 }
