@@ -5,17 +5,20 @@ class Solution {
         int min = Integer.MAX_VALUE;
         while(low<=high)
         {
-            int mid = low+(high-low)/2;
-            if(nums[mid]<min) 
+
+            if(nums[low]<=nums[high])
             {
-                min = nums[mid];
-            } 
+                min  = Math.min(min,nums[low]);
+                break;
+            }
+            int mid = low+(high-low)/2; 
             if(nums[low]<=nums[mid])
             {
                 min = Math.min(nums[low],min);
                 low = mid+1;
             }else{
 
+                    min = Math.min(min,nums[mid]);
                 high = mid-1;
             }
         }
