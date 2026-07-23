@@ -3,7 +3,7 @@ class Solution {
         int low = 0;
         int high = nums.length-1;
         int min = Integer.MAX_VALUE;
-        while(low<=high)
+        while(low<high)
         {
 
             if(nums[low]<=nums[high])
@@ -12,16 +12,22 @@ class Solution {
                 break;
             }
             int mid = low+(high-low)/2; 
-            if(nums[low]<=nums[mid])
+            // if(nums[low]<=nums[mid])
+            // {
+            //     min = Math.min(nums[low],min);
+            //     low = mid+1;
+            // }else{
+
+            //         min = Math.min(min,nums[mid]);
+            //     high = mid-1;
+            // }
+            if(nums[mid]>nums[high])
             {
-                min = Math.min(nums[low],min);
                 low = mid+1;
             }else{
-
-                    min = Math.min(min,nums[mid]);
-                high = mid-1;
+                high = mid;
             }
         }
-        return min;
+        return nums[low];
     }
 }
