@@ -9,10 +9,11 @@ class Solution {
             int mid = low+(high-low)/2;
             int r = mid/col;
             int c = mid%col;
-            if(matrix[r][c]==target)
+            int value = matrix[r][c];
+            if(value==target)
             {
                 return true;
-            }else if(matrix[r][c]>target)
+            }else if(value>target)
             {
                 high = mid-1;
             }else{
