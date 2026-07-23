@@ -19,6 +19,7 @@ class Solution {
             for(int b :piles)
             {
                 sum += ((long)b+mid-1)/mid;
+                 if (sum > h) break;
             }
             if(sum<=h)
             {
