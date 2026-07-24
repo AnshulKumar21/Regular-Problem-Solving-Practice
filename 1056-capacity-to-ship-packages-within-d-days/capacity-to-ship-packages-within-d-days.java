@@ -20,9 +20,10 @@ class Solution {
                 {
                     d++;
                     sum=weights[i];
-                }
-                if(d > days)
+                    if(d > days)
                      break;
+                }
+                
             }
             if(d<=days)
             {
