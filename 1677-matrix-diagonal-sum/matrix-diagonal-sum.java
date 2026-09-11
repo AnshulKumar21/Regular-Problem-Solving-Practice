@@ -7,8 +7,9 @@ class Solution {
             {
                 if(i==j)
                 {
-                    sum+=(mat[i][j]);
-                }else if(i+j==(mat.length-1))
+                sum+=(mat[i][j]);
+                }
+                else if(i+j==(mat.length-1))
                 {
                     sum+=(mat[i][j]);
                 }
